@@ -1,6 +1,8 @@
-import {useState, useEffect} from "react";
+import {useState,} from "react";
+import AlertError from "./AlertError.jsx";
 
-function Form() {
+// eslint-disable-next-line react/prop-types
+function Form({createPatients}) {
   // init state petName
   const [petName, setPetName] = useState('')
   // init state clientName
@@ -20,7 +22,26 @@ function Form() {
       setIsError(true)
     } else {
       setIsError(false)
+      // creating object patient
+      const objPatient = {
+        id: '123',
+        petName,
+        clientName,
+        clientEmail,
+        enterPet,
+        triagePet,
+        enable: true
+      }
+      // send patient
+      createPatients(objPatient)
     }
+    // clean inputs form
+    setPetName('')
+    setClientName('')
+    setClientEmail('')
+    setEnterPet('')
+    setTriagePet('')
+
   }
 
   return (
@@ -34,10 +55,9 @@ function Form() {
             onSubmit={handleSubmit}>
           {/*show errors*/}
           {isError && (
-              <div className={'bg-red-800 m-3 p-3 font-bold rounded-lg text-white text-center'}>
-                <p>All Camps are required ..</p>
-              </div>
+              <AlertError/>
           )}
+
           {/*petName*/}
           <div className="petName mb-7">
             <label
