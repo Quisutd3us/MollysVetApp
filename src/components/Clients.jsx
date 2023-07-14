@@ -1,6 +1,6 @@
 function Clients() {
   return (
-      <div className="bg-white shadow-xl rounded-lg my-10 py-8 px-3">
+      <div className="border-l-8 border-l-emerald-700 bg-white shadow-xl rounded-lg my-10 py-8 px-3">
         {/*petName*/}
         <div className=" mb-5">
           <p
