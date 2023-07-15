@@ -18,7 +18,9 @@ function App() {
           <Form
               createPatients={createPatients}
           />
-          <ListClients/>
+          <ListClients
+              patients={patients}
+          />
         </div>
       </div>
   )

@@ -1,4 +1,4 @@
-function Client() {
+function Client({petName,clientName,clientEmail,enterPet,triagePet}) {
   return (
       <div className="border-l-8 border-l-emerald-700 bg-white shadow-xl rounded-lg my-10 py-8 px-3">
         {/*petName*/}
@@ -7,7 +7,7 @@ function Client() {
               className={'block text-gray-700 font-bold uppercase'}
           >PET NAME: {' '}
             <span
-                className={'font-normal normal-case'}>petName
+                className={'font-normal normal-case'}>{petName}
               </span>
           </p>
         </div>
@@ -17,7 +17,7 @@ function Client() {
               className={'block text-gray-700 font-bold uppercase'}
           >CLIENT NAME: {' '}
             <span
-                className={'font-normal normal-case'}>jHON dOE
+                className={'font-normal normal-case'}>{clientName}
               </span>
           </p>
         </div>
@@ -27,7 +27,7 @@ function Client() {
               className={'block text-gray-700 font-bold uppercase'}
           >Email: {' '}
             <span
-                className={'font-normal normal-case'}>jdoe@gmail.com
+                className={'font-normal normal-case'}>{clientEmail}
               </span>
           </p>
         </div>
@@ -37,7 +37,7 @@ function Client() {
               className={'block text-gray-700 font-bold uppercase'}
           > Date Enter Pet: {' '}
             <span
-                className={'font-normal normal-case'}>01/07/2023
+                className={'font-normal normal-case'}>{enterPet}
               </span>
           </p>
         </div>
@@ -47,7 +47,7 @@ function Client() {
               className={'block text-gray-700 font-bold uppercase'}
           >Triage Pet: {' '}
             <span
-                className={'font-normal normal-case'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur autem, commodi cum cupiditate dicta doloremque, earum error exercitationem fuga fugit incidunt inventore iste libero magni perferendis quae quis reiciendis tenetur voluptate?
+                className={'font-normal normal-case'}>{triagePet}
               </span>
           </p>
         </div>
