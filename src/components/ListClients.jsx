@@ -10,10 +10,10 @@ function ListClients({patients}) {
         </p>
         <div className={'md:h-screen overflow-y-scroll'}>
           {/*Client INFO*/}
-          {patients.map(patient =>
+          {patients.map((patient, index) =>
               (
                   <Client
-                      key={patient.id}
+                      key={index}
                       patient={patient}
                   />
               )
