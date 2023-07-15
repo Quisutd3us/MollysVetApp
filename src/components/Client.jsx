@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-function Client(patient) {
-  const {petName, clientName,clientEmail,enterPet,triagePet} =patient
+function Client({patient}) {
+  const {petName, clientName, clientEmail, enterPet, triagePet} = patient
   return (
       <div className="border-l-8 border-l-emerald-700 bg-white shadow-xl rounded-lg my-10 py-8 px-3">
         {/*petName*/}
@@ -56,11 +56,14 @@ function Client(patient) {
         </div>
       </div>
   );
-}Client.propTypes = {
-  petName: PropTypes.string.isRequired,
-  clientName:PropTypes.string.isRequired,
-  clientEmail:PropTypes.string.isRequired,
-  enterPet:PropTypes.string.isRequired,
-  triagePet: PropTypes.string.isRequired
+}
+
+Client.propTypes = {
+  patient:PropTypes.object,
+  petName: PropTypes.string,
+  clientName: PropTypes.string,
+  clientEmail: PropTypes.string,
+  enterPet: PropTypes.string,
+  triagePet: PropTypes.string
 };
 export default Client;

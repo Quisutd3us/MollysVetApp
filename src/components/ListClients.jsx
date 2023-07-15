@@ -1,7 +1,7 @@
 import Client from "./Client.jsx";
 import PropTypes from "prop-types";
 
-function ListClients(patients) {
+function ListClients({patients}) {
   return (
       <div className={'md:w-1/2 lg:w-2/3 mx-2'}>
         <h4 className={'text-3xl font-black text-right'}>List Clients</h4>
@@ -23,8 +23,8 @@ function ListClients(patients) {
   );
 }
 
-ListClients.PropTypes = {
-  patients: PropTypes.array.isRequired
+ListClients.propTypes = {
+  patients: PropTypes.array
 }
 
 export default ListClients;
