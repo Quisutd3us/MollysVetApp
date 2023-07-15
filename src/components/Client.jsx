@@ -1,4 +1,7 @@
-function Client({petName,clientName,clientEmail,enterPet,triagePet}) {
+import PropTypes from 'prop-types';
+
+function Client(patient) {
+  const {petName, clientName,clientEmail,enterPet,triagePet} =patient
   return (
       <div className="border-l-8 border-l-emerald-700 bg-white shadow-xl rounded-lg my-10 py-8 px-3">
         {/*petName*/}
@@ -53,5 +56,11 @@ function Client({petName,clientName,clientEmail,enterPet,triagePet}) {
         </div>
       </div>
   );
-}
+}Client.propTypes = {
+  petName: PropTypes.string.isRequired,
+  clientName:PropTypes.string.isRequired,
+  clientEmail:PropTypes.string.isRequired,
+  enterPet:PropTypes.string.isRequired,
+  triagePet: PropTypes.string.isRequired
+};
 export default Client;

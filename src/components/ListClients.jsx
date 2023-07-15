@@ -1,6 +1,7 @@
 import Client from "./Client.jsx";
+import PropTypes from "prop-types";
 
-function ListClients({patients}) {
+function ListClients(patients) {
   return (
       <div className={'md:w-1/2 lg:w-2/3 mx-2'}>
         <h4 className={'text-3xl font-black text-right'}>List Clients</h4>
@@ -8,24 +9,22 @@ function ListClients({patients}) {
           <span className={'text-indigo-600 font-bold'}> Clients and Dates</span>
         </p>
         <div className={'md:h-screen overflow-y-scroll'}>
-
           {/*Client INFO*/}
-          {patients.map((patient) =>
+          {patients.map(patient =>
               (
                   <Client
                       key={patient.id}
-                      id={patient.id}
-                      petName={patient.petName}
-                      clientName={patient.clientName}
-                      clientEmail={patient.clientEmail}
-                      enterPet={patient.enterPet}
-                      triagePet={patient.triagePet}
+                      patient={patient}
                   />
               )
           )}
         </div>
       </div>
   );
+}
+
+ListClients.PropTypes = {
+  patients: PropTypes.array.isRequired
 }
 
 export default ListClients;
