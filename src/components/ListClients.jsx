@@ -1,6 +1,7 @@
-import Clients from "./Clients.jsx";
+import Client from "./Client.jsx";
 
 function ListClients() {
+
   return (
       <div className={'md:w-1/2 lg:w-2/3 mx-2'}>
         <h4 className={'text-3xl font-black text-right'}>List Clients</h4>
@@ -9,11 +10,10 @@ function ListClients() {
         </p>
         <div className={'md:h-screen overflow-y-scroll'}>
           {/*Client INFO*/}
-          <Clients/>
-          <Clients/>
-          <Clients/>
+          <Client/>
         </div>
       </div>
   );
 }
+
 export default ListClients;

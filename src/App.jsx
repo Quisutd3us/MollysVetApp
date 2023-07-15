@@ -10,7 +10,6 @@ function App() {
   const createPatients = (objPatient) => {
     const newPatient = [objPatient, ...patients]
     setPatients(newPatient)
-    console.log(patients)
   }
   return (
       <div className={"container mx-auto mt-20"}>

@@ -24,7 +24,6 @@ function Form({createPatients}) {
       setIsError(false)
       // creating object patient
       const objPatient = {
-        id: '123',
         petName,
         clientName,
         clientEmail,
@@ -43,7 +42,6 @@ function Form({createPatients}) {
     setTriagePet('')
 
   }
-
   return (
       <div className={'md:w-1/2 lg:w-1/3 mx-2'}>
         <h4 className={'text-3xl text-black'}>Process Clients</h4>
@@ -53,9 +51,9 @@ function Form({createPatients}) {
         <form
             className="bg-white shadow-lg rounded-lg my-10 py-8 px-3"
             onSubmit={handleSubmit}>
-          {/*show errors*/}
+          {/*manage input errors*/}
           {isError && (
-              <AlertError/>
+              <AlertError>{'All Camps are required ..'}</AlertError>
           )}
 
           {/*petName*/}
@@ -147,7 +145,6 @@ function Form({createPatients}) {
               type={'submit'}
               className={'bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:cursor-pointer hover:bg-indigo-700 transition-colors'}
               value={'Add Pet'}
-
           />
         </form>
       </div>
