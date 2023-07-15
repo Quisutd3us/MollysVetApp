@@ -1,4 +1,5 @@
 import {useState,} from "react";
+import { v4 as uuidv4 } from 'uuid';
 import AlertError from "./AlertError.jsx";
 
 // eslint-disable-next-line react/prop-types
@@ -24,6 +25,7 @@ function Form({createPatients}) {
       setIsError(false)
       // creating object patient
       const objPatient = {
+        id: uuidv4(),
         petName,
         clientName,
         clientEmail,
