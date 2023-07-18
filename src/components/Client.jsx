@@ -2,6 +2,12 @@ import PropTypes from 'prop-types';
 
 function Client({patient, setPatient, delPatient}) {
   const {petName, clientName, clientEmail, enterPet, triagePet} = patient
+  const handleDel = () => {
+    const rsp = confirm('Are you sure to delete this Record')
+    if (rsp) {
+      delPatient(patient)
+    }
+  }
   return (
       <div className="border-l-8 border-l-emerald-500 bg-white shadow-xl rounded-lg my-10 py-8 px-3">
         {/*petName*/}
@@ -60,7 +66,7 @@ function Client({patient, setPatient, delPatient}) {
           <div className={'inline-flex'}>
             {/*Edit Button*/}
             <button
-                className="bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-2 px-4 mx-3 rounded inline-flex items-center"
+                className="bg-yellow-400 hover:bg-indigo-400 text-black font-bold py-2 px-4 mx-3 rounded inline-flex items-center"
                 onClick={() => setPatient(patient)}>
 
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
@@ -75,7 +81,7 @@ function Client({patient, setPatient, delPatient}) {
             {/*Delete Button*/}
             <button
                 className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded inline-flex items-center"
-                onClick={() => delPatient(patient)}>
+                onClick={handleDel}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                    stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round"
