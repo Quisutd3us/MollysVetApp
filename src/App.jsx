@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import './App.css'
 import Header from "./components/Header.jsx";
 import Form from "./components/Form.jsx";
@@ -10,6 +10,20 @@ function App() {
 
   // create patient state
   const [patient, setPatient] = useState({})
+
+
+  // Add LocalStorage Functionality
+  useEffect(() => {
+    const getPatientsLS = () => {
+      const patientsLS = JSON.parse(localStorage.getItem('patients')) ?? [];
+      setPatients(patientsLS)
+    }
+    getPatientsLS()
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('patients', JSON.stringify(patients))
+  }, [patients])
 
   // del patient
   const delPatient = (item) => {
