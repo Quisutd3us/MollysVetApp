@@ -1,9 +1,10 @@
-import {useState,} from "react";
-import { v4 as uuidv4 } from 'uuid';
+import {useState, useEffect} from "react";
+import {v4 as uuidv4} from 'uuid';
 import AlertError from "./AlertError.jsx";
+import PropTypes from "prop-types";
 
 // eslint-disable-next-line react/prop-types
-function Form({createPatients}) {
+function Form({patients, setPatients, patient, setPatient}) {
   // init state petName
   const [petName, setPetName] = useState('')
   // init state clientName
@@ -16,33 +17,70 @@ function Form({createPatients}) {
   const [triagePet, setTriagePet] = useState('')
   // init state manage errors
   const [isError, setIsError] = useState(false)
+
+  // Manage Submit
   const handleSubmit = (e) => {
     e.preventDefault()
     // validate Form
     if ([petName, clientName, clientEmail, enterPet, triagePet].includes('')) {
       setIsError(true)
-    } else {
-      setIsError(false)
-      // creating object patient
-      const objPatient = {
-        id: uuidv4(),
-        petName,
-        clientName,
-        clientEmail,
-        enterPet,
-        triagePet,
-        enable: true
-      }
-      // send patient
-      createPatients(objPatient)
+      return
     }
-    // clean inputs form
+    setIsError(false)
+
+    // creating object patient
+    const objPatient = {
+      petName,
+      clientName,
+      clientEmail,
+      enterPet,
+      triagePet,
+      isEdit: false
+    }
+    if (Object.entries(patient).length !== 0) {
+      //edit Patient
+      console.log('edit...')
+      objPatient.id = patient.id
+      // Find patient updated and Load updatePatients whit changes in new Array
+      const updatePatients = patients.map((patientState) => patientState.id === objPatient.id ? objPatient : patientState)
+      // Set State Patients
+      setPatients(updatePatients)
+      // Clean Patient object that contain the patient to edit
+      setPatient({})
+    } else {
+      // create Patient
+      console.log('Setting')
+      objPatient.id = uuidv4();
+      setPatients([objPatient, ...patients])
+    }
+
+    // clean form inputs
     setPetName('')
     setClientName('')
     setClientEmail('')
     setEnterPet('')
     setTriagePet('')
 
+  }
+
+  // Manage Edit Patient
+  useEffect(() => {
+    if (Object.entries(patient).length !== 0) {
+      setPetName(patient.petName)
+      setClientName(patient.clientName)
+      setClientEmail(patient.clientEmail)
+      setEnterPet(patient.enterPet)
+      setTriagePet(patient.triagePet)
+    }
+  }, [patient])
+
+  // Set Styles to New and Edit Button
+  const isEdit = () => {
+    if (patient.id) {
+      return 'bg-red-600 w-full p-3 text-white uppercase font-bold hover:cursor-pointer hover:bg-indigo-700 transition-colors'
+    } else {
+      return 'bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:cursor-pointer hover:bg-indigo-700 transition-colors'
+    }
   }
   return (
       <div className={'md:w-1/2 lg:w-1/3 mx-2'}>
@@ -69,6 +107,8 @@ function Form({createPatients}) {
                 className={'border-2 rounded-md border-indigo-600 w-full p-2 mt-2 placeholder-indigo-400'}
                 type={'text'}
                 placeholder={'Ej.Molly'}
+                required={true}
+                maxLength={40}
                 value={petName}
                 onChange={(e) => setPetName(e.target.value)}
             />
@@ -85,7 +125,7 @@ function Form({createPatients}) {
                 type={'text'}
                 placeholder={'Ej. Jon Doe'}
                 required={true}
-                maxLength={20}
+                maxLength={40}
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
 
@@ -103,6 +143,7 @@ function Form({createPatients}) {
                 type={'email'}
                 placeholder={'Ej. name@email.com'}
                 required={true}
+                maxLength={40}
                 value={clientEmail}
                 onChange={(e) => setClientEmail(e.target.value)}
             />
@@ -134,7 +175,7 @@ function Form({createPatients}) {
                 required={true}
                 rows={5}
                 cols={33}
-                maxLength={200}
+                maxLength={500}
                 minLength={50}
                 placeholder={'Molly have pop fiber'}
                 value={triagePet}
@@ -145,12 +186,19 @@ function Form({createPatients}) {
           {/*Submit*/}
           <input
               type={'submit'}
-              className={'bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:cursor-pointer hover:bg-indigo-700 transition-colors'}
-              value={'Add Pet'}
+              className={isEdit()}
+              value={patient.id ? 'Update Patient' : 'Create Patient'}
           />
         </form>
       </div>
   );
 }
+
+Form.propTypes = {
+  patients: PropTypes.array,
+  patient: PropTypes.object,
+  setPatients: PropTypes.func,
+  setPatient: PropTypes.func
+};
 
 export default Form;

@@ -5,21 +5,33 @@ import Form from "./components/Form.jsx";
 import ListClients from "./components/ListClients.jsx";
 
 function App() {
-  // create patient state
+  // create patients state
   const [patients, setPatients] = useState([])
-  const createPatients = (objPatient) => {
-    const newPatient = [objPatient, ...patients]
-    setPatients(newPatient)
+
+  // create patient state
+  const [patient, setPatient] = useState({})
+
+  // del patient
+  const delPatient = (item) => {
+    // Find and load array without patient to del
+    const delArray = patients.filter((patientState) => patientState.id !== item.id)
+    // Update patients Array
+    setPatients(delArray)
   }
   return (
       <div className={"container mx-auto mt-20"}>
         <Header/>
         <div className={'mt-12 md:flex justify-between'}>
           <Form
-              createPatients={createPatients}
+              patients={patients}
+              setPatients={setPatients}
+              patient={patient}
+              setPatient={setPatient}
           />
           <ListClients
               patients={patients}
+              setPatient={setPatient}
+              delPatient={delPatient}
           />
         </div>
       </div>
